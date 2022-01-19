@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct ProgressRing: View {
+    @EnvironmentObject var fastingManager: FastingManager
     @State var progress: Double = 0.0
+    
+    let timer = Timer
+        .publish(every: 1, on: .main, in: .common)
+        .autoconnect()
     
     var body: some View {
         ZStack {
@@ -26,25 +31,42 @@ struct ProgressRing: View {
                 .animation(.easeIn(duration: 1.0), value: progress)
             
             VStack(spacing: 30) {
-                // MARK: Elapsed Time
-                VStack(spacing: 5) {
-                    Text("Elapsed Time")
-                        .opacity(0.7)
+                if fastingManager.fastingState == .notStarted {
+                    // MARK: Upcoming Fast
+                    VStack(spacing: 5) {
+                        Text("Upcoming fast")
+                            .opacity(0.7)
+                        
+                        Text("\(fastingManager.fastingPlan.fastingPeriod.formatted()) Hours")
+                            .font(.title)
+                            .fontWeight(.bold)
+                    }
+                } else {
+                    // MARK: Elapsed Time
+                    VStack(spacing: 5) {
+                        Text("Upcoming fast")
+                            .opacity(0.7)
+                        
+                        Text(fastingManager.startTime, style: .timer)
+                            .font(.title)
+                            .fontWeight(.bold)
+                    }
+                    .padding(.top)
                     
-                    Text("0:00")
-                        .font(.title)
-                        .fontWeight(.bold)
-                }
-                .padding(.top)
-                
-                // MARK: Remaining Time
-                VStack(spacing: 5) {
-                    Text("Remaining Time")
-                        .opacity(0.7)
-                    
-                    Text("0:00")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                    // MARK: Remaining Time
+                    VStack(spacing: 5) {
+                        if !fastingManager.elapsed {
+                            Text("Remaining Time")
+                                .opacity(0.7)
+                        } else {
+                            Text("Extra Time")
+                                .opacity(0.7)
+                        }
+                        
+                        Text(fastingManager.endTime, style: .timer)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                    }
                 }
             }
         }
@@ -53,11 +75,15 @@ struct ProgressRing: View {
         .onAppear {
             progress = 0.85
         }
+        .onReceive(timer) { _ in
+            fastingManager.track()
+        }
     }
 }
 
 struct ProgressRing_Previews: PreviewProvider {
     static var previews: some View {
         ProgressRing()
+            .environmentObject(FastingManager())
     }
 }

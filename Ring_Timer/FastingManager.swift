@@ -50,6 +50,8 @@ class FastingManager: ObservableObject {
         }
     }
     
+    @Published private(set) var elapsed: Bool = false
+    
     var fastingTime: Double {
         return fastingPlan.fastingPeriod
     }
@@ -78,6 +80,18 @@ class FastingManager: ObservableObject {
     func toggleFastingState() {
         fastingState = fastingState == .fasting ? .feeding : .fasting
         startTime = Date()
+    }
+    
+    func track() {
+        guard fastingState != .notStarted else { return }
+        print("Now", Date().formatted(.dateTime.month().day().hour().minute().second()))
         
+        if endTime >= Date() {
+            print("Not elapsed.")
+            elapsed = false
+        } else {
+            print("Elapsed")
+            elapsed = true
+        }
     }
 }

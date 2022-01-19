@@ -38,7 +38,7 @@ struct ContentView: View {
                     .foregroundColor(Color(#colorLiteral(red: 0.4014265537, green: 0.6402670145, blue: 1, alpha: 1)))
                 
                 // MARK: Fasting Plan
-                Text("16:8")
+                Text(fastingManager.fastingPlan.rawValue)
                     .fontWeight(.semibold)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 8)
@@ -59,7 +59,7 @@ struct ContentView: View {
                         Text(fastingManager.fastingState == .notStarted ? "Start" : "Started")
                             .opacity(0.7)
                         
-                        Text(Date(), format: .dateTime.weekday().hour().minute().second())
+                        Text(fastingManager.startTime, format: .dateTime.weekday().hour().minute().second())
                             .fontWeight(.bold)
                     }
                     
@@ -68,12 +68,12 @@ struct ContentView: View {
                         Text(fastingManager.fastingState == .notStarted ? "End" : "Ends")
                             .opacity(0.7)
                         
-                        Text(Date().addingTimeInterval(16), format: .dateTime.weekday().hour().minute().second())
+                        Text(fastingManager.endTime, format: .dateTime.weekday().hour().minute().second())
                             .fontWeight(.bold)
                     }
                 }
                 // MARK: Button
-                Button(action: { }, label: {
+                Button(action: { fastingManager.toggleFastingState() }, label: {
                     Text(fastingManager.fastingState == .fasting ? "End fast" : "Start fasting")
                         .font(.title3)
                         .fontWeight(.semibold)

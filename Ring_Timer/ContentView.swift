@@ -9,8 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Ring Timer Prototype")
-            .padding()
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+            
+            content
+        }
+    }
+    
+    var content: some View {
+        VStack {
+            // MARK: Progress Ring
+            ProgressRing()
+        }
     }
 }
 

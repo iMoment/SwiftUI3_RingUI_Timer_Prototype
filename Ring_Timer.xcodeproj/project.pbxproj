@@ -11,6 +11,7 @@
 		91F4064B2798AC0F00FBEFB9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F4064A2798AC0F00FBEFB9 /* ContentView.swift */; };
 		91F4064D2798AC1000FBEFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91F4064C2798AC1000FBEFB9 /* Assets.xcassets */; };
 		91F406502798AC1000FBEFB9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91F4064F2798AC1000FBEFB9 /* Preview Assets.xcassets */; };
+		91F406582798ADFE00FBEFB9 /* ProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F406572798ADFE00FBEFB9 /* ProgressRing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		91F4064A2798AC0F00FBEFB9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		91F4064C2798AC1000FBEFB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91F4064F2798AC1000FBEFB9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		91F406572798ADFE00FBEFB9 /* ProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				91F406482798AC0F00FBEFB9 /* Ring_TimerApp.swift */,
 				91F4064A2798AC0F00FBEFB9 /* ContentView.swift */,
+				91F406562798ADEB00FBEFB9 /* Components */,
 				91F4064C2798AC1000FBEFB9 /* Assets.xcassets */,
 				91F4064E2798AC1000FBEFB9 /* Preview Content */,
 			);
@@ -65,6 +68,14 @@
 				91F4064F2798AC1000FBEFB9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		91F406562798ADEB00FBEFB9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				91F406572798ADFE00FBEFB9 /* ProgressRing.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			files = (
 				91F4064B2798AC0F00FBEFB9 /* ContentView.swift in Sources */,
 				91F406492798AC0F00FBEFB9 /* Ring_TimerApp.swift in Sources */,
+				91F406582798ADFE00FBEFB9 /* ProgressRing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

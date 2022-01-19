@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ProgressRing: View {
     @EnvironmentObject var fastingManager: FastingManager
-    @State var progress: Double = 0.0
     
     let timer = Timer
         .publish(every: 1, on: .main, in: .common)
@@ -25,10 +24,10 @@ struct ProgressRing: View {
             
             // MARK: Colored Ring
             Circle()
-                .trim(from: 0.0, to: min(progress, 1.0))
+                .trim(from: 0.0, to: min(fastingManager.progress, 1.0))
                 .stroke(AngularGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.4014265537, green: 0.6402670145, blue: 1, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.4479528666, blue: 0.7060645223, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.771382153, blue: 0.9066230655, alpha: 1)), Color(#colorLiteral(red: 0.6395459175, green: 0.9769180417, blue: 0.9774548411, alpha: 1)), Color(#colorLiteral(red: 0.4014265537, green: 0.6402670145, blue: 1, alpha: 1))]), center: .center), style: StrokeStyle(lineWidth: 15.0, lineCap: .round, lineJoin: .round))
                 .rotationEffect(Angle(degrees: 270))
-                .animation(.easeIn(duration: 1.0), value: progress)
+                .animation(.easeIn(duration: 1.0), value: fastingManager.progress)
             
             VStack(spacing: 30) {
                 if fastingManager.fastingState == .notStarted {
@@ -44,7 +43,7 @@ struct ProgressRing: View {
                 } else {
                     // MARK: Elapsed Time
                     VStack(spacing: 5) {
-                        Text("Upcoming fast")
+                        Text("Elapsed Time (\(fastingManager.progress.formatted(.percent)))")
                             .opacity(0.7)
                         
                         Text(fastingManager.startTime, style: .timer)
@@ -56,7 +55,7 @@ struct ProgressRing: View {
                     // MARK: Remaining Time
                     VStack(spacing: 5) {
                         if !fastingManager.elapsed {
-                            Text("Remaining Time")
+                            Text("Remaining Time (\((1 - fastingManager.progress).formatted(.percent)))")
                                 .opacity(0.7)
                         } else {
                             Text("Extra Time")
@@ -72,9 +71,9 @@ struct ProgressRing: View {
         }
         .frame(width: 250, height: 250)
         .padding()
-        .onAppear {
-            progress = 0.85
-        }
+//        .onAppear {
+//            progress = 0.85
+//        }
         .onReceive(timer) { _ in
             fastingManager.track()
         }

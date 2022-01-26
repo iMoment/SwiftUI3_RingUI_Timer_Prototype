@@ -55,11 +55,13 @@ class FastingManager: ObservableObject {
     @Published private(set) var progress: Double = 0.0
     
     var fastingTime: Double {
-        return fastingPlan.fastingPeriod * 60 * 60
+//        return fastingPlan.fastingPeriod * 60 * 60
+        return fastingPlan.fastingPeriod
     }
     
     var feedingTime: Double {
-        return (24 - fastingPlan.fastingPeriod) * 60 * 60
+//        return (24 - fastingPlan.fastingPeriod) * 60 * 60
+        return (24 - fastingPlan.fastingPeriod)
     }
     
     init() {
